@@ -1,0 +1,199 @@
+<template>
+  <div>
+    <div class="mac_bg"></div>
+    <div class="login animated"
+         :class="{'bounceOut':pass}">
+      <div class="head">
+        <img :src="userInfo.avatar"
+             alt="">
+      </div>
+      <div class="message">{{userInfo.username}}</div>
+      <div class="form">
+        <div class="item"
+             style="width:320px"
+             :class="passwdError?'error':''">
+          <input class="password"
+                 placeholder="password here..."
+                 v-model="passwd"
+                 type="password" />
+          <i class="iconfont el-icon-unlock"
+             @click="handleLogin"></i>
+          <i class="iconfont icon-tuichu"
+             @click="handleLogout"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import { mapGetters } from "vuex";
+export default {
+  data () {
+    return {
+      passwdError: false,
+      passwd: '',
+      pass: false
+    }
+  },
+  computed: {
+    ...mapGetters(['userInfo', "tag", "lockPasswd"])
+  },
+  methods: {
+    handleLogout () {
+      this.$store.dispatch("LogOut").then(() => {
+        this.$router.push({ path: "/login" });
+      });
+    },
+    handleLogin () {
+      if (this.passwd != this.lockPasswd) {
+        this.passwd = "";
+        this.passwdError = true;
+        setTimeout(() => {
+          this.passwdError = false;
+        }, 1000);
+        return;
+      }
+      this.pass = true;
+      setTimeout(() => {
+        this.$store.commit("CLEAR_LOCK");
+        this.$router.push({
+          path: this.tag.value
+        });
+      }, 1000);
+    }
+  }
+}
+</script>
+<style scoped>
+@keyframes loginErrorAnimation {
+  0% {
+    margin-left: -30px;
+  }
+  50% {
+    margin-left: 30px;
+  }
+  100% {
+    margin-left: 0;
+  }
+}
+.login {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin-top: -100px;
+  z-index: 99999;
+  backdrop-filter: blur(20px);
+}
+
+.head {
+  padding: 3px;
+  background-size: 40% auto;
+  background-position: center center;
+  height: 150px;
+  width: 150px;
+  border-radius: 100%;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.1);
+  margin-top: -50px;
+  overflow: hidden;
+}
+.head img {
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+.message {
+  margin-top: 20px;
+  font-size: 20px;
+  text-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.3);
+  color: #eee;
+  margin-bottom: 50px;
+}
+
+.password {
+  transition: width 0.3s;
+}
+
+.password-in {
+  width: 155px;
+}
+
+.login-button {
+  position: absolute;
+  top: 5px;
+  right: -50px;
+  transition: right 0.3s;
+}
+
+.click-enable {
+  right: 0;
+}
+
+.error {
+  animation: loginErrorAnimation 0.2s ease 3;
+}
+
+::-webkit-input-placeholder {
+  color: #fff;
+}
+
+::-moz-placeholder {
+  color: #fff;
+}
+
+:-ms-input-placeholder {
+  color: #fff;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item {
+  position: relative;
+  width: 280px;
+  display: flex;
+  align-items: center;
+}
+.item input {
+  color: white;
+  outline: none;
+  border: none;
+  margin: 5px 0;
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 8px 24px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  flex: 1;
+}
+
+.item .iconfont {
+  margin-left: 10px;
+  vertical-align: middle;
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.3);
+  font-size: 18px;
+  border-radius: 100%;
+  width: 36px;
+  height: 36px;
+  text-align: center;
+  line-height: 36px;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.item .iconfont:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+</style>
