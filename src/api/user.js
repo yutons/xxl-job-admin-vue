@@ -1,7 +1,6 @@
 import request from '@/router/axios';
-import { baseUrl } from '@/config/env';
 export const loginByUsername = (username, password, code, redomStr) => request({
-    url: baseUrl + '/user/login',
+    url: '/user/login',
     method: 'post',
     meta: {
         isToken: false
@@ -15,17 +14,17 @@ export const loginByUsername = (username, password, code, redomStr) => request({
 })
 
 export const getUserInfo = () => request({
-    url: baseUrl + '/user/getUserInfo',
+    url: '/user/getUserInfo',
     method: 'get'
 });
 
 export const refeshToken = () => request({
-    url: baseUrl + '/user/refesh',
+    url: '/user/refesh',
     method: 'post'
 })
 
 export const getMenu = (type = 0) => request({
-    url: baseUrl + '/user/getMenu',
+    url: '/user/getMenu',
     method: 'get',
     data: {
         type
@@ -33,18 +32,18 @@ export const getMenu = (type = 0) => request({
 });
 
 export const getTopMenu = () => request({
-    url: baseUrl + '/user/getTopMenu',
+    url: '/user/getTopMenu',
     method: 'get'
 });
 
 export const sendLogs = (list) => request({
-    url: baseUrl + '/user/logout',
+    url: '/user/logout',
     method: 'post',
     data: list
 })
 
 export const logout = () => request({
-    url: baseUrl + '/user/logout',
+    url: '/user/logout',
     meta: {
         isToken: false
     },

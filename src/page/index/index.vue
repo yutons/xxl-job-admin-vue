@@ -2,7 +2,7 @@
   <div class="avue-contail"
        :class="{'avue--collapse':isCollapse,}">
     <screenshot v-if="setting.screenshot"></screenshot>
-    <setting></setting>
+    <!-- <setting></setting> -->
     <div class="avue-layout"
          :class="{'avue-layout--horizontal':isHorizontal}">
       <div class="avue-sidebar"
@@ -30,9 +30,9 @@
                          v-if="isRefresh" />
           </keep-alive>
         </div>
-        <div class="avue-footer">
+        <!-- <div class="avue-footer">
           <p class="copyright">© 2018-2021 Avue designed by smallwei</p>
-        </div>
+        </div> -->
       </div>
     </div>
 

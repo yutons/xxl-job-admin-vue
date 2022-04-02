@@ -2,10 +2,10 @@
  * 全局配置文件
  */
 export default {
-  title: "Avue",
-  logo: "A",
+  title: "任务调度平台",
+  logo: "JOB",
   key: 'avue',//配置主键,目前用于存储
-  indexTitle: '后台快速开发模版',
+  indexTitle: 'XXL-JOB 任务调度平台',
   lockPage: '/lock',
   tokenTime: 6000,//token过期时间
   Authorization: 'Authorization',
@@ -16,15 +16,15 @@ export default {
   setting: {
     sidebar: 'vertical',
     tag: true,
-    debug: true,
+    debug: false,
     collapse: true,
-    search: true,
-    lock: true,
-    screenshot: true,
-    fullscren: true,
-    theme: true,
+    search: false,
+    lock: false,
+    screenshot: false,
+    fullscren: false,
+    theme: false,
     menu: true,
-    color: true,
+    color: false,
   },
   fistPage: {
     name: "首页",

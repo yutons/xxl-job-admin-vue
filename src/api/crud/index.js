@@ -1,9 +1,8 @@
 
 import request from '@/router/axios';
-import { baseUrl } from '@/config/env';
 export const list = (data) => {
   return request({
-    url: baseUrl + '/crud/list',
+    url: '/crud/list',
     method: 'get',
     meta: {
       isSerialize: true
@@ -11,13 +10,13 @@ export const list = (data) => {
     params: data
   })
 }
-export const del = (id) => request.delete(baseUrl + '/crud/delete', {
+export const del = (id) => request.delete('/crud/delete', {
   params: {
     id
   }
 })
 export const add = (data) => request({
-  url: baseUrl + '/crud/add',
+  url: '/crud/add',
   method: 'post',
   meta: {
     isSerialize: true
@@ -25,7 +24,7 @@ export const add = (data) => request({
   data: data
 })
 export const update = (id, data) => request({
-  url: baseUrl + '/crud/update',
+  url: '/crud/update',
   method: 'put',
   meta: {
     isSerialize: true

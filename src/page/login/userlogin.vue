@@ -68,7 +68,6 @@
 </template>
 
 <script>
-import { baseUrl } from '@/config/env';
 import { randomLenNum } from "@/util/util";
 import { mapGetters } from "vuex";
 export default {
@@ -127,7 +126,7 @@ export default {
       this.loginForm.redomStr = randomLenNum(this.code.len, true);
       this.code.type == "text"
         ? (this.code.value = randomLenNum(this.code.len))
-        : (this.code.src = `${baseUrl}/code?=${this.loginForm.redomStr}`);
+        : (this.code.src = `/code?=${this.loginForm.redomStr}`);
       this.loginForm.code = this.code.value;
     },
     showPassword () {

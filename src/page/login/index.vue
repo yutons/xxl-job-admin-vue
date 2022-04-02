@@ -16,10 +16,10 @@
         <div class="login-main">
           <h4 class="login-title">
             {{ $t('login.title') }}{{website.title}}
-            <top-lang></top-lang>
+            <!-- <top-lang></top-lang> -->
           </h4>
           <userLogin v-if="activeName==='user'"></userLogin>
-          <codeLogin v-else-if="activeName==='code'"></codeLogin>
+          <!-- <codeLogin v-else-if="activeName==='code'"></codeLogin>
           <faceLogin v-else-if="activeName==='face'"></faceLogin>
           <thirdLogin></thirdLogin>
           <div class="login-menu">
@@ -29,7 +29,7 @@
                @click.stop="activeName='code'">{{ $t('login.phoneLogin') }}</a>
             <a href="#"
                @click.stop="activeName='face'">{{ $t('login.faceLogin') }}</a>
-          </div>
+          </div> -->
         </div>
 
       </div>
