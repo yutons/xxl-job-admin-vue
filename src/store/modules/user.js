@@ -16,14 +16,8 @@ const user = {
   actions: {
     //根据用户名登录
     LoginByUsername ({ commit }, userInfo = {}) {
-      const user = encryption({
-        data: userInfo,
-        type: 'Aes',
-        key: 'avue',
-        param: ['useranme', 'password']
-      });
       return new Promise((resolve) => {
-        loginByUsername(user.username, user.password, userInfo.code, userInfo.redomStr).then(res => {
+        loginByUsername(userInfo.username, userInfo.password, userInfo.ifRemember).then(res => {
           const data = res.data.data;
           commit('SET_TOKEN', data);
           commit('DEL_ALL_TAG');
@@ -73,6 +67,7 @@ const user = {
     LogOut ({ commit }) {
       return new Promise((resolve, reject) => {
         logout().then(() => {
+		  sessionStorage.removeItem("avue-user")
           commit('SET_TOKEN', '')
           commit('SET_MENUALL_NULL', []);
           commit('SET_MENU', [])

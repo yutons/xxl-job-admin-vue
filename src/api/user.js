@@ -1,15 +1,14 @@
 import request from '@/router/axios';
-export const loginByUsername = (username, password, code, redomStr) => request({
-    url: '/user/login',
+export const loginByUsername = (username, password, isRemember) => request({
+    url: '/api/xxl-job-admin/login',
     method: 'post',
     meta: {
         isToken: false
     },
-    data: {
-        username,
-        password,
-        code,
-        redomStr
+    params: {
+        userName:username,
+        password:password,
+        isRemember:isRemember
     }
 })
 
