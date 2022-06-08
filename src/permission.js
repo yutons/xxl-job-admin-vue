@@ -36,14 +36,8 @@ router.beforeEach((to, from, next) => {
         });
       }
       //如果用户信息为空则获取用户信息，获取用户信息失败，跳转到登录页
-      if (store.getters.roles.length === 0) {
-        store.dispatch('GetUserInfo').then(() => {
-          next()
-        }).catch(() => {
-          store.dispatch('FedLogOut').then(() => {
-            next({ path: '/login' })
-          })
-        })
+      if (!store.getters.userInfo) {
+        next({ path: '/login' })
       } else {
         next()
       }

@@ -5,7 +5,7 @@ import { loginByUsername, getUserInfo, getMenu, getTopMenu, logout, refeshToken 
 import { formatPath } from '@/router/avue-router'
 const user = {
   state: {
-    userInfo: {},
+    userInfo: getStore({ name: 'userInfo' }) || {},
     permission: {},
     roles: [],
     menuId: {},
@@ -18,7 +18,9 @@ const user = {
     LoginByUsername ({ commit }, userInfo = {}) {
       return new Promise((resolve) => {
         loginByUsername(userInfo.username, userInfo.password, userInfo.ifRemember).then(res => {
-          const data = res.data.data;
+		  const data = res.data.data;
+		  userInfo.password = "";
+          commit('SET_USERIFNO', userInfo);
           commit('SET_TOKEN', data);
           commit('DEL_ALL_TAG');
           commit('CLEAR_LOCK');
@@ -67,8 +69,8 @@ const user = {
     LogOut ({ commit }) {
       return new Promise((resolve, reject) => {
         logout().then(() => {
-		  sessionStorage.removeItem("avue-user")
           commit('SET_TOKEN', '')
+          commit('SET_USERIFNO', '')
           commit('SET_MENUALL_NULL', []);
           commit('SET_MENU', [])
           commit('SET_ROLES', [])
@@ -85,6 +87,7 @@ const user = {
     FedLogOut ({ commit }) {
       return new Promise(resolve => {
         commit('SET_TOKEN', '')
+        commit('SET_USERIFNO', '')
         commit('SET_MENUALL_NULL', []);
         commit('SET_MENU', [])
         commit('SET_ROLES', [])
@@ -127,6 +130,7 @@ const user = {
     },
     SET_USERIFNO: (state, userInfo) => {
       state.userInfo = userInfo;
+      setStore({ name: 'userInfo', content: state.userInfo })
     },
     SET_MENUALL: (state, menuAll) => {
       let menu = state.menuAll;

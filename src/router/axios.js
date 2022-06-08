@@ -30,9 +30,10 @@ axios.interceptors.request.use(config => {
   NProgress.start() // start progress bar
   const meta = (config.meta || {});
   const isToken = meta.isToken === false;
-  if (getToken() && !isToken) {
-    config.headers[website.Authorization] = 'Bearer ' + getToken() // 让每个请求携带token--['Authorization']为自定义key 请根据实际情况自行修改
-  }
+  // 忽略请求头
+  //if (getToken() && !isToken) {
+  //  config.headers[website.Authorization] = 'Bearer ' + getToken() // 让每个请求携带token--['Authorization']为自定义key 请根据实际情况自行修改
+  //}
   //headers中配置serialize为true开启序列化
   if (config.method === 'post' && meta.isSerialize === true) {
     config.data = serialize(config.data);
